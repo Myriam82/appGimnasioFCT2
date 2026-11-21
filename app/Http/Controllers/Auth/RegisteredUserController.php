@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -35,8 +34,7 @@ class RegisteredUserController extends Controller
             'direccion' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'rol' => ['required']
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
         $user = User::create([
@@ -46,13 +44,11 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'dni' => $request->dni,
             'password' => Hash::make($request->password),
-            'rol' => $request->rol
+            'rol' => 'Usuario',
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('login')->with('status', 'Registro completado. Ya puedes iniciar sesión.');
     }
 }

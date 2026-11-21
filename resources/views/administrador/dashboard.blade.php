@@ -45,6 +45,14 @@
                 <h4 class="text-xl font-semibold text-gray-800">Listado de Usuarios</h4>
                 <p class="text-gray-500 text-center mt-2">Crear y administrar Usuarios</p>
             </a>
+
+             {{-- Listado de Usuarios --}}
+            <a href="{{ route('usuarios.listado') }}"
+                class="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center justify-center hover:shadow-2xl transition border border-gray-200">
+                <div class="text-5xl mb-3">📋</div>
+                <h4 class="text-xl font-semibold text-gray-800">Cuotas y pagos</h4>
+                <p class="text-gray-500 text-center mt-2">Gestionar cuotas y pagos de los usuarios</p>
+            </a>
         </div>
     </div>
 </x-app-layout>

@@ -32,16 +32,16 @@ class UserSeeder extends Seeder
         ]);
 
 
-        User::create([
-
-            'dni' => '88475t',
-            'name' => 'Admin',
-            'email' => 'Admin@usuario.com',
-            'password' => Hash::make('administrador'),
-            'telefono' => 'Admin',
-            'direccion' => 'Admin',
-            'rol' => User::ROLE_ADMINISTRADOR,
-
-        ]);
+       User::firstOrCreate(
+    ['email' => 'admin@usuario.com'],   // busca por esto
+    [                                   
+        'dni'       => '88475T',
+        'name'      => 'Admin',
+        'password'  => Hash::make('administrador'),
+        'telefono'  => '000000000',
+        'direccion' => 'Admin',
+        'rol'       => User::ROLE_ADMINISTRADOR,
+    ]
+       );
     }
 }

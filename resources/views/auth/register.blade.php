@@ -1,17 +1,6 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <!-- Role (añadido) -->
-        <div class="mt-4">
-            <x-input-label for="rol" :value="__('Rol')" />
-            <select id="rol" name="rol" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
-                <option value="">Seleccione un rol</option>
-                <option value="usuario" {{ old('rol') == 'usuario' ? 'selected' : '' }}>Usuario</option>
-                <option type="hidden" value="administrador" {{ old('rol') == 'administrador' ? 'selected' : '' }}>Administrador</option>
-            </select>
-            <x-input-error :messages="$errors->get('rol')" class="mt-2" />
-        </div>
-
         <!-- Dni -->
         <div>
             <x-input-label for="dni" :value="__('Dni')" />

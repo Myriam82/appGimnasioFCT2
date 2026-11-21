@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cuota_id')->constrained()->restrictOnDelete();
+            $table->decimal('importe', 8, 2);
+            $table->date('fecha_pago');
+            $table->string('metodo'); // efectivo, tarjeta, transferencia
+            $table->foreignId('registrado_por')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pagos');

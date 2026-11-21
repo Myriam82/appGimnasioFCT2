@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class User extends Authenticatable
 {
@@ -35,7 +35,6 @@ class User extends Authenticatable
         'telefono',
         'direccion',
         'rol',
-        'membresia',
     ];
 
 
@@ -81,8 +80,17 @@ class User extends Authenticatable
         return $this->rol === self::ROLE_USUARIO;
     }
     // En User.php y en Cuota.php
-public function pagos(): HasMany
+
+
+public function pagos(): HasManyThrough
 {
-    return $this->hasMany(Pago::class, 'usuario_id'); // en Cuota: 'cuota_id'
+    return $this->hasManyThrough(Pago::class, Cuota::class, 'user_id', 'cuota_id');
+}
+
+
+
+public function cuotas(): HasMany
+{
+    return $this->hasMany(Cuota::class, 'user_id');
 }
 }
